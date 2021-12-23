@@ -1,0 +1,13 @@
+#import MutationResponse from './Basics.graphql'
+
+type SignupPayload implements MutationResponse {
+  code: String!
+  success: Boolean!
+  message: String!
+}
+
+type VerifyEmailPayload implements MutationResponse {
+  code: String!
+  success: Boolean!
+  message: String!
+}

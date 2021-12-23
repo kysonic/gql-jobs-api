@@ -1,0 +1,15 @@
+#import Book, BookInput from './types/Book.graphql';
+#import UserProfileInput from './types/User.graphql';
+#import SignupPayload, VerifyEmailPayload from './types/Auth.graphql';
+
+type Query {
+  books(title: String, page: Int, limit: Int, sort: String): [Book]
+}
+
+type Mutation {
+  signup(email: String!, password: String!, data: UserProfileInput!): SignupPayload!
+  verifyEmail(email: String!, token: String!): VerifyEmailPayload!
+  createBook(book: BookInput!): Book!
+  updateBook(id: String!, book: BookInput!): Book!
+  deleteBook(id: String!): String!
+}
