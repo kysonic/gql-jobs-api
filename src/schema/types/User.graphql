@@ -9,6 +9,11 @@ type UserSystem {
   verificationToken: String
 }
 
+type PublicUser {
+  _id: ID!
+  email: String!
+  profile: UserProfile
+}
 type User {
   _id: ID!
   email: String!

@@ -1,4 +1,5 @@
 #import MutationResponse from './Basics.graphql'
+#import PublicUser from './User.graphql'
 
 type SignupPayload implements MutationResponse {
   code: String!
@@ -10,4 +11,12 @@ type VerifyEmailPayload implements MutationResponse {
   code: String!
   success: Boolean!
   message: String!
+}
+
+type LoginPayload implements MutationResponse {
+  code: String!
+  success: Boolean!
+  message: String!
+  user: PublicUser!
+  token: String!
 }

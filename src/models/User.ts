@@ -1,6 +1,11 @@
 import { Schema, model } from 'mongoose';
 import validator from 'validator';
 import bcrypt from 'bcrypt';
+import { User, UserProfile, UserSystem } from '../types/schema';
+
+export type MongooseUser = User & {
+  comparePassword: (password: string) => boolean;
+};
 
 const STRONG_PASSWORD_OPTIONS = {
   minLength: 6,
@@ -9,7 +14,7 @@ const STRONG_PASSWORD_OPTIONS = {
   minNumbers: 1,
 };
 
-const UserSystemSchema = new Schema({
+const UserSystemSchema = new Schema<UserSystem>({
   isEmailApproved: {
     type: Boolean,
     default: false,
@@ -17,7 +22,7 @@ const UserSystemSchema = new Schema({
   verificationToken: String,
 });
 
-const UserProfileSchema = new Schema({
+const UserProfileSchema = new Schema<UserProfile>({
   firstName: {
     type: String,
     minlength: 2,
@@ -31,7 +36,7 @@ const UserProfileSchema = new Schema({
   birthDate: Date,
 });
 
-const UserSchema = new Schema({
+const UserSchema = new Schema<MongooseUser>({
   email: {
     type: String,
     unique: true,
@@ -69,4 +74,4 @@ UserSchema.methods.comparePassword = async function UserComparePassword(
   return bcrypt.compare(password, this.password);
 };
 
-export default model('User', UserSchema);
+export default model<MongooseUser>('User', UserSchema);
