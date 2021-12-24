@@ -1,16 +1,23 @@
 #import Book, BookInput from './types/Book.graphql';
-#import User, UserProfileInput from './types/User.graphql';
+#import User, PublicUser, UserProfileInput from './types/User.graphql';
 #import * from './types/Auth.graphql';
 
 type Query {
   books(title: String, page: Int, limit: Int, sort: String): [Book]
-  myUser: User!
+  myUser: PublicUser!
+  fullUser: User
 }
 
 type Mutation {
-  signup(email: String!, password: String!, data: UserProfileInput!): SignupPayload!
+  signup(
+    email: String!
+    password: String!
+    data: UserProfileInput!
+  ): SignupPayload!
   verifyEmail(email: String!, token: String!): VerifyEmailPayload!
   login(email: String!, password: String!): LoginPayload!
+  logout: LogoutPayload!
+  forgotPassword(email: String!): ForgotPasswordPayload!
   createBook(book: BookInput!): Book!
   updateBook(id: String!, book: BookInput!): Book!
   deleteBook(id: String!): String!

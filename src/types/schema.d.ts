@@ -31,8 +31,14 @@ export type LoginPayload = MutationResponse & {
   code: Scalars['String'];
   message: Scalars['String'];
   success: Scalars['Boolean'];
-  token: Scalars['String'];
   user: PublicUser;
+};
+
+export type LogoutPayload = MutationResponse & {
+  __typename?: 'LogoutPayload';
+  code: Scalars['String'];
+  message: Scalars['String'];
+  success: Scalars['Boolean'];
 };
 
 export type Mutation = {
@@ -40,6 +46,7 @@ export type Mutation = {
   createBook: Book;
   deleteBook: Scalars['String'];
   login: LoginPayload;
+  logout: LogoutPayload;
   signup: SignupPayload;
   updateBook: Book;
   verifyEmail: VerifyEmailPayload;
@@ -96,7 +103,8 @@ export type PublicUser = {
 export type Query = {
   __typename?: 'Query';
   books?: Maybe<Array<Maybe<Book>>>;
-  myUser: User;
+  fullUser?: Maybe<User>;
+  myUser: PublicUser;
 };
 
 

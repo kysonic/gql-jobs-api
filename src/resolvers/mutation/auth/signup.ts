@@ -1,4 +1,4 @@
-import { UserInputError } from 'apollo-server';
+import { UserInputError } from 'apollo-server-express';
 import crypto from 'crypto';
 import { MutationSignupArgs } from '../../../types/schema';
 import User from '../../../models/User';

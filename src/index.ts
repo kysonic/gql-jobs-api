@@ -1,23 +1,57 @@
-import { ApolloServer } from 'apollo-server';
+import { ApolloServer } from 'apollo-server-express';
+import express from 'express';
+import cookieParser from 'cookie-parser';
+import http from 'http';
 import dotenv from 'dotenv';
-import { ApolloServerPluginLandingPageGraphQLPlayground } from 'apollo-server-core';
+import {
+  ApolloServerPluginLandingPageGraphQLPlayground,
+  ApolloServerPluginDrainHttpServer,
+} from 'apollo-server-core';
 import { connectDB } from './db/connect';
 import resolvers from './resolvers';
 import { getTypeDefs } from './typedefs';
 
 dotenv.config();
 
-// Apollo server plugins
-const plugins = [ApolloServerPluginLandingPageGraphQLPlayground()];
-
 async function start() {
   try {
+    const app = express();
+    app.use(cookieParser(process.env.JWT_SECRET));
+    const httpServer = http.createServer(app);
     const typeDefs = await getTypeDefs();
-    const server = new ApolloServer({ typeDefs, resolvers, plugins });
+    const server = new ApolloServer({
+      typeDefs,
+      resolvers,
+      plugins: [
+        ApolloServerPluginLandingPageGraphQLPlayground({
+          settings: {
+            'request.credentials': 'include',
+          },
+        }),
+        ApolloServerPluginDrainHttpServer({ httpServer }),
+      ],
+      context: ({ req, res }) => ({
+        req,
+        res,
+      }),
+    });
 
     await connectDB(process.env.MONGO_URI);
-    const { url } = await server.listen();
-    console.log(`🚀  Server ready at ${url}`);
+
+    await server.start();
+
+    server.applyMiddleware({
+      app,
+      path: '/',
+    });
+
+    await new Promise<void>((resolve) =>
+      // eslint-disable-next-line no-promise-executor-return
+      httpServer.listen({ port: 4000 }, resolve),
+    );
+    console.log(
+      `🚀 Server ready at http://localhost:4000${server.graphqlPath}`,
+    );
   } catch (err) {
     console.error('Cannot run server', err);
   }

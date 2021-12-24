@@ -1,4 +1,4 @@
-import { AuthenticationError } from 'apollo-server';
+import { AuthenticationError } from 'apollo-server-express';
 import { MutationVerifyEmailArgs } from '../../../types/schema';
 import User from '../../../models/User';
 

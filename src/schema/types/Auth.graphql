@@ -18,5 +18,14 @@ type LoginPayload implements MutationResponse {
   success: Boolean!
   message: String!
   user: PublicUser!
-  token: String!
+}
+type LogoutPayload implements MutationResponse {
+  code: String!
+  success: Boolean!
+  message: String!
+}
+type ForgotPasswordPayload implements MutationResponse {
+  code: String!
+  success: Boolean!
+  message: String!
 }

@@ -1,10 +1,12 @@
 import { Schema, model } from 'mongoose';
+import { omit } from 'lodash';
 import validator from 'validator';
 import bcrypt from 'bcrypt';
-import { User, UserProfile, UserSystem } from '../types/schema';
+import { User, UserProfile, UserSystem, PublicUser } from '../types/schema';
 
 export type MongooseUser = User & {
   comparePassword: (password: string) => boolean;
+  getPublicUser: () => PublicUser;
 };
 
 const STRONG_PASSWORD_OPTIONS = {
@@ -72,6 +74,10 @@ UserSchema.methods.comparePassword = async function UserComparePassword(
   password: string,
 ) {
   return bcrypt.compare(password, this.password);
+};
+
+UserSchema.methods.getPublicUser = function GetPublicUser() {
+  return omit(this.toObject(), ['password', 'system']);
 };
 
 export default model<MongooseUser>('User', UserSchema);
