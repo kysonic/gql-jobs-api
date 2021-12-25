@@ -29,3 +29,9 @@ type ForgotPasswordPayload implements MutationResponse {
   success: Boolean!
   message: String!
 }
+
+type ResetPasswordPayload implements MutationResponse {
+  code: String!
+  success: Boolean!
+  message: String!
+}

@@ -18,6 +18,7 @@ type Mutation {
   login(email: String!, password: String!): LoginPayload!
   logout: LogoutPayload!
   forgotPassword(email: String!): ForgotPasswordPayload!
+  resetPassword(email: String!, token: String!, newPassword: String!): ResetPasswordPayload!
   createBook(book: BookInput!): Book!
   updateBook(id: String!, book: BookInput!): Book!
   deleteBook(id: String!): String!

@@ -26,6 +26,13 @@ export type BookInput = {
   title: Scalars['String'];
 };
 
+export type ForgotPasswordPayload = MutationResponse & {
+  __typename?: 'ForgotPasswordPayload';
+  code: Scalars['String'];
+  message: Scalars['String'];
+  success: Scalars['Boolean'];
+};
+
 export type LoginPayload = MutationResponse & {
   __typename?: 'LoginPayload';
   code: Scalars['String'];
@@ -45,8 +52,10 @@ export type Mutation = {
   __typename?: 'Mutation';
   createBook: Book;
   deleteBook: Scalars['String'];
+  forgotPassword: ForgotPasswordPayload;
   login: LoginPayload;
   logout: LogoutPayload;
+  resetPassword: ResetPasswordPayload;
   signup: SignupPayload;
   updateBook: Book;
   verifyEmail: VerifyEmailPayload;
@@ -63,9 +72,21 @@ export type MutationDeleteBookArgs = {
 };
 
 
+export type MutationForgotPasswordArgs = {
+  email: Scalars['String'];
+};
+
+
 export type MutationLoginArgs = {
   email: Scalars['String'];
   password: Scalars['String'];
+};
+
+
+export type MutationResetPasswordArgs = {
+  email: Scalars['String'];
+  newPassword: Scalars['String'];
+  token: Scalars['String'];
 };
 
 
@@ -115,6 +136,13 @@ export type QueryBooksArgs = {
   title?: InputMaybe<Scalars['String']>;
 };
 
+export type ResetPasswordPayload = MutationResponse & {
+  __typename?: 'ResetPasswordPayload';
+  code: Scalars['String'];
+  message: Scalars['String'];
+  success: Scalars['Boolean'];
+};
+
 export type SignupPayload = MutationResponse & {
   __typename?: 'SignupPayload';
   code: Scalars['String'];
@@ -149,6 +177,8 @@ export type UserProfileInput = {
 export type UserSystem = {
   __typename?: 'UserSystem';
   isEmailApproved: Scalars['Boolean'];
+  passwordToken?: Maybe<Scalars['String']>;
+  passwordTokenExpirationDate?: Maybe<Scalars['String']>;
   verificationToken?: Maybe<Scalars['String']>;
 };
 

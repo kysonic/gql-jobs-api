@@ -4,9 +4,12 @@ import validator from 'validator';
 import bcrypt from 'bcrypt';
 import { User, UserProfile, UserSystem, PublicUser } from '../types/schema';
 
-export type MongooseUser = User & {
+export type MongooseUser = Omit<User, 'system'> & {
   comparePassword: (password: string) => boolean;
   getPublicUser: () => PublicUser;
+  system: Omit<UserSystem, 'passwordTokenExpirationDate'> & {
+    passwordTokenExpirationDate: Date | null;
+  };
 };
 
 const STRONG_PASSWORD_OPTIONS = {
@@ -22,6 +25,8 @@ const UserSystemSchema = new Schema<UserSystem>({
     default: false,
   },
   verificationToken: String,
+  passwordToken: String,
+  passwordTokenExpirationDate: Date,
 });
 
 const UserProfileSchema = new Schema<UserProfile>({

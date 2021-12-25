@@ -45,7 +45,7 @@ export async function approveEmail(
   return sendMailgunEmail(email, 'Approve your email', html);
 }
 
-export async function forgetEmail(
+export async function forgotEmail(
   email: string,
   url: string,
 ): Promise<MailgunResponse> {

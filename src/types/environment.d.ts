@@ -10,6 +10,7 @@ declare global {
       ACCESS_TOKEN_TTL: number;
       JWT_SECRET: string;
       PASSWORD_SALT: string;
+      RESET_EMAIL_URL: string;
     }
   }
 }
