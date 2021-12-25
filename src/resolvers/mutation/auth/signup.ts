@@ -31,6 +31,9 @@ export default async (
       email,
       `${process.env.APPROVE_EMAIL_URL}?token=${verificationToken}&email=${email}`,
     );
+    console.log(
+      `${process.env.APPROVE_EMAIL_URL}?token=${verificationToken}&email=${email}`,
+    );
   } catch (err) {
     // Rollback user if email is not sent
     await User.findOneAndDelete(user._id);
