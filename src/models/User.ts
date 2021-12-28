@@ -2,7 +2,14 @@ import { Schema, model } from 'mongoose';
 import { omit } from 'lodash';
 import validator from 'validator';
 import bcrypt from 'bcrypt';
-import { User, UserProfile, UserSystem, PublicUser } from '../types/schema';
+import {
+  User,
+  UserProfile,
+  UserSystem,
+  PublicUser,
+  SkillEnum,
+  LevelEnum,
+} from '../types/schema';
 
 export type MongooseUser = Omit<User, 'system'> & {
   comparePassword: (password: string) => boolean;
@@ -41,6 +48,26 @@ const UserProfileSchema = new Schema<UserProfile>({
     maxlength: 40,
   },
   birthDate: Date,
+  phone: {
+    type: String,
+    validate: {
+      validator: validator.isMobilePhone,
+      message: 'Phone is not valid...',
+    },
+  },
+  skills: {
+    type: [String],
+    enum: Object.values(SkillEnum),
+  },
+  level: {
+    type: String,
+    enum: Object.values(LevelEnum),
+  },
+  experience: {
+    type: Number,
+    min: 0,
+    max: 15,
+  },
 });
 
 const UserSchema = new Schema<MongooseUser>({

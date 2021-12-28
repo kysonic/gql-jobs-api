@@ -1,0 +1,41 @@
+#import Application from './Application.graphql'
+
+enum SkillEnum {
+  JS
+  NODE
+  TYPESCRIPT
+  APOLLO
+  MONGODB
+  POSTGRES
+}
+
+enum LevelEnum {
+  JUNIOR
+  MIDDLE
+  SENIOR
+}
+
+enum Benefits {
+  MEDICAL_INSURANCE
+  GYM
+  GIFT_CARDS
+  FREE_PARKING
+  COFFEE
+}
+
+type JobSalary {
+  from: Int
+  to: Int
+}
+
+type Job {
+  _id: ID!
+  title: String!
+  description: String
+  skills: [SkillEnum]
+  level: LevelEnum
+  salary: JobSalary
+  benefits: Benefits
+  requiredExperience: Int
+  cover: String
+}

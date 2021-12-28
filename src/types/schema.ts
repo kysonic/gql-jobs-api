@@ -33,6 +33,12 @@ export type ForgotPasswordPayload = MutationResponse & {
   success: Scalars['Boolean'];
 };
 
+export enum LevelEnum {
+  Junior = 'JUNIOR',
+  Middle = 'MIDDLE',
+  Senior = 'SENIOR'
+}
+
 export type LoginPayload = MutationResponse & {
   __typename?: 'LoginPayload';
   code: Scalars['String'];
@@ -150,6 +156,15 @@ export type SignupPayload = MutationResponse & {
   success: Scalars['Boolean'];
 };
 
+export enum SkillEnum {
+  Apollo = 'APOLLO',
+  Js = 'JS',
+  Mongodb = 'MONGODB',
+  Node = 'NODE',
+  Postgres = 'POSTGRES',
+  Typescript = 'TYPESCRIPT'
+}
+
 export type User = {
   __typename?: 'User';
   _id: Scalars['ID'];
@@ -164,14 +179,22 @@ export type User = {
 export type UserProfile = {
   __typename?: 'UserProfile';
   birthDate?: Maybe<Scalars['String']>;
+  experience?: Maybe<Scalars['Int']>;
   firstName?: Maybe<Scalars['String']>;
   lastName?: Maybe<Scalars['String']>;
+  level?: Maybe<LevelEnum>;
+  phone?: Maybe<Scalars['String']>;
+  skills?: Maybe<Array<Maybe<SkillEnum>>>;
 };
 
 export type UserProfileInput = {
   birthDate?: InputMaybe<Scalars['String']>;
+  experience?: InputMaybe<Scalars['Int']>;
   firstName?: InputMaybe<Scalars['String']>;
   lastName?: InputMaybe<Scalars['String']>;
+  level?: InputMaybe<LevelEnum>;
+  phone?: InputMaybe<Scalars['String']>;
+  skills?: InputMaybe<Array<InputMaybe<SkillEnum>>>;
 };
 
 export type UserSystem = {

@@ -1,7 +1,12 @@
+#import SkillEnum, LevelEnum from './Job.graphql'
 type UserProfile {
   firstName: String
   lastName: String
   birthDate: String
+  phone: String
+  skills: [SkillEnum]
+  level: LevelEnum
+  experience: Int
 }
 
 type UserSystem {
@@ -30,4 +35,8 @@ input UserProfileInput {
   firstName: String
   lastName: String
   birthDate: String
+  phone: String
+  skills: [SkillEnum]
+  level: LevelEnum
+  experience: Int
 }

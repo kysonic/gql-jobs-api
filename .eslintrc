@@ -7,11 +7,11 @@
   "plugins": ["@typescript-eslint", "prettier"],
   "settings": {
     "import/parsers": {
-      "@typescript-eslint/parser": [".ts", ".tsx", ".d.ts"]
+      "@typescript-eslint/parser": [".ts", ".d.ts"]
     },
     "import/resolver": {
       "node": {
-        "extensions": [".js", ".jsx", ".ts", ".tsx", ".d.ts"]
+        "extensions": [".js", ".ts", ".d.ts"]
       }
     }
   },
@@ -34,6 +34,6 @@
         "ts": "never",
         "tsx": "never"
       }
-   ]
+    ]
   }
 }

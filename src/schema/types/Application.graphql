@@ -1,0 +1,6 @@
+#import User from './User.graphql'
+
+type Application {
+  from: User 
+  message: String
+}
