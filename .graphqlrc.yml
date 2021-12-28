@@ -1,1 +1,1 @@
-schema: "schema/schema.graphql"
+schema: "src/schema/schema.graphql"

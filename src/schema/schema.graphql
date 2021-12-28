@@ -1,9 +1,7 @@
-#import Book, BookInput from './types/Book.graphql';
 #import User, PublicUser, UserProfileInput from './types/User.graphql';
 #import * from './types/Auth.graphql';
 
 type Query {
-  books(title: String, page: Int, limit: Int, sort: String): [Book]
   myUser: PublicUser!
   fullUser: User
 }
@@ -19,7 +17,4 @@ type Mutation {
   logout: LogoutPayload!
   forgotPassword(email: String!): ForgotPasswordPayload!
   resetPassword(email: String!, token: String!, newPassword: String!): ResetPasswordPayload!
-  createBook(book: BookInput!): Book!
-  updateBook(id: String!, book: BookInput!): Book!
-  deleteBook(id: String!): String!
 }
