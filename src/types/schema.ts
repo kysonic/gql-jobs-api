@@ -12,25 +12,57 @@ export type Scalars = {
   Float: number;
 };
 
-export type Book = {
-  __typename?: 'Book';
-  _id?: Maybe<Scalars['String']>;
-  author?: Maybe<Scalars['String']>;
-  createdAt?: Maybe<Scalars['String']>;
-  title?: Maybe<Scalars['String']>;
-  updatedAt?: Maybe<Scalars['String']>;
-};
-
-export type BookInput = {
-  author: Scalars['String'];
-  title: Scalars['String'];
-};
+export enum BenefitEnum {
+  Coffee = 'COFFEE',
+  FreeParking = 'FREE_PARKING',
+  GiftCards = 'GIFT_CARDS',
+  Gym = 'GYM',
+  MedicalInsurance = 'MEDICAL_INSURANCE'
+}
 
 export type ForgotPasswordPayload = MutationResponse & {
   __typename?: 'ForgotPasswordPayload';
   code: Scalars['String'];
   message: Scalars['String'];
   success: Scalars['Boolean'];
+};
+
+export type Job = {
+  __typename?: 'Job';
+  _id: Scalars['ID'];
+  author: User;
+  benefits?: Maybe<Array<Maybe<BenefitEnum>>>;
+  cover?: Maybe<Scalars['String']>;
+  createdAt: Scalars['String'];
+  description?: Maybe<Scalars['String']>;
+  level?: Maybe<LevelEnum>;
+  requiredExperience?: Maybe<Scalars['Int']>;
+  salary?: Maybe<JobSalary>;
+  skills?: Maybe<Array<Maybe<SkillEnum>>>;
+  title: Scalars['String'];
+  updatedAt: Scalars['String'];
+};
+
+export type JobInput = {
+  benefits?: InputMaybe<Array<InputMaybe<BenefitEnum>>>;
+  cover?: InputMaybe<Scalars['String']>;
+  description?: InputMaybe<Scalars['String']>;
+  level?: InputMaybe<LevelEnum>;
+  requiredExperience?: InputMaybe<Scalars['Int']>;
+  salary?: InputMaybe<JobSalaryInput>;
+  skills?: InputMaybe<Array<InputMaybe<SkillEnum>>>;
+  title: Scalars['String'];
+};
+
+export type JobSalary = {
+  __typename?: 'JobSalary';
+  from?: Maybe<Scalars['Int']>;
+  to?: Maybe<Scalars['Int']>;
+};
+
+export type JobSalaryInput = {
+  from?: InputMaybe<Scalars['Int']>;
+  to?: InputMaybe<Scalars['Int']>;
 };
 
 export enum LevelEnum {
@@ -56,25 +88,18 @@ export type LogoutPayload = MutationResponse & {
 
 export type Mutation = {
   __typename?: 'Mutation';
-  createBook: Book;
-  deleteBook: Scalars['String'];
+  createJob: Job;
   forgotPassword: ForgotPasswordPayload;
   login: LoginPayload;
   logout: LogoutPayload;
   resetPassword: ResetPasswordPayload;
   signup: SignupPayload;
-  updateBook: Book;
   verifyEmail: VerifyEmailPayload;
 };
 
 
-export type MutationCreateBookArgs = {
-  book: BookInput;
-};
-
-
-export type MutationDeleteBookArgs = {
-  id: Scalars['String'];
+export type MutationCreateJobArgs = {
+  job: JobInput;
 };
 
 
@@ -103,12 +128,6 @@ export type MutationSignupArgs = {
 };
 
 
-export type MutationUpdateBookArgs = {
-  book: BookInput;
-  id: Scalars['String'];
-};
-
-
 export type MutationVerifyEmailArgs = {
   email: Scalars['String'];
   token: Scalars['String'];
@@ -129,17 +148,15 @@ export type PublicUser = {
 
 export type Query = {
   __typename?: 'Query';
-  books?: Maybe<Array<Maybe<Book>>>;
   fullUser?: Maybe<User>;
+  getAllJobs: Array<Job>;
   myUser: PublicUser;
 };
 
 
-export type QueryBooksArgs = {
+export type QueryGetAllJobsArgs = {
   limit?: InputMaybe<Scalars['Int']>;
   page?: InputMaybe<Scalars['Int']>;
-  sort?: InputMaybe<Scalars['String']>;
-  title?: InputMaybe<Scalars['String']>;
 };
 
 export type ResetPasswordPayload = MutationResponse & {

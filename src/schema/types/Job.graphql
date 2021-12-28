@@ -1,3 +1,4 @@
+#import User from './User.graphql'
 #import Application from './Application.graphql'
 
 enum SkillEnum {
@@ -15,7 +16,7 @@ enum LevelEnum {
   SENIOR
 }
 
-enum Benefits {
+enum BenefitEnum {
   MEDICAL_INSURANCE
   GYM
   GIFT_CARDS
@@ -35,7 +36,25 @@ type Job {
   skills: [SkillEnum]
   level: LevelEnum
   salary: JobSalary
-  benefits: Benefits
+  benefits: [BenefitEnum]
+  requiredExperience: Int
+  cover: String
+  author: User!
+  createdAt: String!
+  updatedAt: String!
+}
+
+input JobSalaryInput {
+  from: Int
+  to: Int
+}
+input JobInput {
+  title: String!
+  description: String
+  skills: [SkillEnum]
+  level: LevelEnum
+  salary: JobSalaryInput
+  benefits: [BenefitEnum]
   requiredExperience: Int
   cover: String
 }

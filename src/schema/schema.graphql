@@ -1,12 +1,17 @@
-#import User, PublicUser, UserProfileInput from './types/User.graphql';
+#import * from './types/User.graphql';
 #import * from './types/Auth.graphql';
+#import * from './types/Job.graphql';
 
 type Query {
+  # Authorization #
   myUser: PublicUser!
   fullUser: User
+  # Job #
+  jobs(page: Int, limit: Int): [Job!]!
 }
 
 type Mutation {
+  # Authorization #
   signup(
     email: String!
     password: String!
@@ -17,4 +22,6 @@ type Mutation {
   logout: LogoutPayload!
   forgotPassword(email: String!): ForgotPasswordPayload!
   resetPassword(email: String!, token: String!, newPassword: String!): ResetPasswordPayload!
+  # Jobs #
+  createJob(job: JobInput!): Job!
 }
