@@ -1,1 +1,1 @@
-db.jobs.createIndex({ description: 'text' });
+db.jobs.createIndex({ title: 'text', description: 'text' });

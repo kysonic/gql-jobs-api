@@ -189,8 +189,13 @@ export type QueryJobArgs = {
 
 
 export type QueryJobsArgs = {
+  benefits?: InputMaybe<Array<InputMaybe<BenefitEnum>>>;
+  level?: InputMaybe<LevelEnum>;
   limit?: InputMaybe<Scalars['Int']>;
   page?: InputMaybe<Scalars['Int']>;
+  salary?: InputMaybe<JobSalaryInput>;
+  skills?: InputMaybe<Array<InputMaybe<SkillEnum>>>;
+  textSearch?: InputMaybe<Scalars['String']>;
 };
 
 export type ResetPasswordPayload = MutationResponse & {

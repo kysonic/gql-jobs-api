@@ -7,7 +7,7 @@ type Query {
   myUser: PublicUser!
   fullUser: User
   # Job #
-  jobs(page: Int, limit: Int): [Job!]!
+  jobs(textSearch: String, skills: [SkillEnum], level: LevelEnum, salary: JobSalaryInput, benefits: [BenefitEnum], page: Int, limit: Int): [Job!]!
   job(id: ID!): Job!
 }
 
