@@ -1,5 +1,6 @@
 #import User from './User.graphql'
 #import Application from './Application.graphql'
+#import MutationResponse from './Basics.graphql'
 
 enum SkillEnum {
   JS
@@ -58,3 +59,23 @@ input JobInput {
   requiredExperience: Int
   cover: String
 }
+
+type CreateJobPayload implements MutationResponse {
+  code: String!
+  success: Boolean!
+  message: String!
+  job: Job!
+}
+
+type UpdateJobPayload implements MutationResponse {
+  code: String!
+  success: Boolean!
+  message: String!
+  job: Job!
+}
+type DeleteJobPayload implements MutationResponse {
+  code: String!
+  success: Boolean!
+  message: String!
+}
+

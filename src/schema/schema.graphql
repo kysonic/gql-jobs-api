@@ -8,6 +8,7 @@ type Query {
   fullUser: User
   # Job #
   jobs(page: Int, limit: Int): [Job!]!
+  job(id: ID!): Job!
 }
 
 type Mutation {
@@ -23,5 +24,7 @@ type Mutation {
   forgotPassword(email: String!): ForgotPasswordPayload!
   resetPassword(email: String!, token: String!, newPassword: String!): ResetPasswordPayload!
   # Jobs #
-  createJob(job: JobInput!): Job!
+  createJob(job: JobInput!): CreateJobPayload!
+  updateJob(id: ID!, job: JobInput!): UpdateJobPayload!
+  deleteJob(id: ID!): DeleteJobPayload!
 }

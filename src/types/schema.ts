@@ -20,6 +20,21 @@ export enum BenefitEnum {
   MedicalInsurance = 'MEDICAL_INSURANCE'
 }
 
+export type CreateJobPayload = MutationResponse & {
+  __typename?: 'CreateJobPayload';
+  code: Scalars['String'];
+  job: Job;
+  message: Scalars['String'];
+  success: Scalars['Boolean'];
+};
+
+export type DeleteJobPayload = MutationResponse & {
+  __typename?: 'DeleteJobPayload';
+  code: Scalars['String'];
+  message: Scalars['String'];
+  success: Scalars['Boolean'];
+};
+
 export type ForgotPasswordPayload = MutationResponse & {
   __typename?: 'ForgotPasswordPayload';
   code: Scalars['String'];
@@ -88,18 +103,25 @@ export type LogoutPayload = MutationResponse & {
 
 export type Mutation = {
   __typename?: 'Mutation';
-  createJob: Job;
+  createJob: CreateJobPayload;
+  deleteJob: DeleteJobPayload;
   forgotPassword: ForgotPasswordPayload;
   login: LoginPayload;
   logout: LogoutPayload;
   resetPassword: ResetPasswordPayload;
   signup: SignupPayload;
+  updateJob: UpdateJobPayload;
   verifyEmail: VerifyEmailPayload;
 };
 
 
 export type MutationCreateJobArgs = {
   job: JobInput;
+};
+
+
+export type MutationDeleteJobArgs = {
+  id: Scalars['ID'];
 };
 
 
@@ -128,6 +150,12 @@ export type MutationSignupArgs = {
 };
 
 
+export type MutationUpdateJobArgs = {
+  id: Scalars['ID'];
+  job: JobInput;
+};
+
+
 export type MutationVerifyEmailArgs = {
   email: Scalars['String'];
   token: Scalars['String'];
@@ -149,12 +177,18 @@ export type PublicUser = {
 export type Query = {
   __typename?: 'Query';
   fullUser?: Maybe<User>;
-  getAllJobs: Array<Job>;
+  job: Job;
+  jobs: Array<Job>;
   myUser: PublicUser;
 };
 
 
-export type QueryGetAllJobsArgs = {
+export type QueryJobArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type QueryJobsArgs = {
   limit?: InputMaybe<Scalars['Int']>;
   page?: InputMaybe<Scalars['Int']>;
 };
@@ -181,6 +215,14 @@ export enum SkillEnum {
   Postgres = 'POSTGRES',
   Typescript = 'TYPESCRIPT'
 }
+
+export type UpdateJobPayload = MutationResponse & {
+  __typename?: 'UpdateJobPayload';
+  code: Scalars['String'];
+  job: Job;
+  message: Scalars['String'];
+  success: Scalars['Boolean'];
+};
 
 export type User = {
   __typename?: 'User';

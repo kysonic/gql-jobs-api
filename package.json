@@ -4,13 +4,15 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon --watch \"src/**\" --ext \"ts,json,graphql\" --ignore \"src/**/*.spec.ts\" --exec \"ts-node --project tsconfig.json src/index.ts\"",
+    "dev": "concurrently \"yarn dev:node\" \"yarn generate:watch\"",
+    "dev:node": "nodemon --watch \"src/**\" --ext \"ts,json,graphql\" --ignore \"src/**/*.spec.ts\" --exec \"ts-node --project tsconfig.json src/index.ts\"",
     "build": "yarn build:clean && yarn build:ts && yarn build:copy",
     "build:clean": "rm -rf ./build",
     "build:ts": "tsc",
     "build:copy": "./copy.assets.sh",
     "start": "node ./build/index.js",
     "generate": "graphql-codegen",
+    "generate:watch": "graphql-codegen --watch",
     "lint": "eslint src/**/*.ts",
     "pretty": "prettier src/**/*.ts"
   },

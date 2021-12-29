@@ -1,0 +1,1 @@
+db.jobs.createIndex({ description: 'text' });

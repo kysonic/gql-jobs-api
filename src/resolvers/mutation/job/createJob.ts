@@ -9,5 +9,12 @@ export default async (
   { req, res }: Context,
 ) => {
   const user = await checkAuthorization(req, res);
-  return Job.create({ ...job, author: user._id });
+  const j = await Job.create({ ...job, author: user._id });
+
+  return {
+    code: '200',
+    success: true,
+    message: 'Job created successfully',
+    job: j,
+  };
 };

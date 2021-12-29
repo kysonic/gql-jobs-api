@@ -1,24 +1,21 @@
+import { UserInputError } from 'apollo-server-core';
 import Job from '../../../models/Job';
 import { Context } from '../../../types/shared';
-import { QueryJobsArgs } from '../../../types/schema';
+import { QueryJobArgs } from '../../../types/schema';
 import checkAuthorization from '../../../middlewares/checkAuthorization';
 
 export default async (
   parent: undefined,
-  { page = 1, limit = 10 }: QueryJobsArgs,
+  { id }: QueryJobArgs,
   { req, res }: Context,
 ) => {
   await checkAuthorization(req, res);
 
-  const cursor = Job.find();
+  const job = await Job.findOne({ _id: id });
 
-  if (page && limit) {
-    const skip = (page - 1) * limit;
-
-    cursor.skip(skip).limit(limit);
+  if (!job) {
+    throw new UserInputError('Job with provided id not found');
   }
 
-  const jobs = await cursor.exec();
-
-  return jobs;
+  return job;
 };
