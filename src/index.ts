@@ -34,6 +34,7 @@ async function start() {
         req,
         res,
       }),
+      // No data sources, so how it's not production application
     });
 
     await connectDB(process.env.MONGO_URI);

@@ -1,6 +1,7 @@
 #import * from './types/User.graphql';
 #import * from './types/Auth.graphql';
 #import * from './types/Job.graphql';
+#import * from './types/Application.graphql';
 
 type Query {
   # Authorization #
@@ -27,4 +28,6 @@ type Mutation {
   createJob(job: JobInput!): CreateJobPayload!
   updateJob(id: ID!, job: JobInput!): UpdateJobPayload!
   deleteJob(id: ID!): DeleteJobPayload!
+  # Application #
+  submitApplication(jobId: ID!): SubmitApplicationPayload!
 }

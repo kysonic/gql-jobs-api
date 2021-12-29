@@ -1,6 +1,13 @@
 #import User from './User.graphql'
+#import MutationResponse from './Basics.graphql'
 
 type Application {
   from: User 
   message: String
+}
+
+type SubmitApplicationPayload implements MutationResponse {
+  code: String!
+  success: Boolean!
+  message: String!
 }

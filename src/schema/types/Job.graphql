@@ -1,4 +1,4 @@
-#import User from './User.graphql'
+#import User, PublicUser from './User.graphql'
 #import Application from './Application.graphql'
 #import MutationResponse from './Basics.graphql'
 
@@ -40,7 +40,7 @@ type Job {
   benefits: [BenefitEnum]
   requiredExperience: Int
   cover: String
-  author: User!
+  author: PublicUser!
   createdAt: String!
   updatedAt: String!
 }

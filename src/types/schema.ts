@@ -110,6 +110,7 @@ export type Mutation = {
   logout: LogoutPayload;
   resetPassword: ResetPasswordPayload;
   signup: SignupPayload;
+  submitApplication: SubmitApplicationPayload;
   updateJob: UpdateJobPayload;
   verifyEmail: VerifyEmailPayload;
 };
@@ -147,6 +148,11 @@ export type MutationSignupArgs = {
   data: UserProfileInput;
   email: Scalars['String'];
   password: Scalars['String'];
+};
+
+
+export type MutationSubmitApplicationArgs = {
+  jobId: Scalars['ID'];
 };
 
 
@@ -220,6 +226,13 @@ export enum SkillEnum {
   Postgres = 'POSTGRES',
   Typescript = 'TYPESCRIPT'
 }
+
+export type SubmitApplicationPayload = MutationResponse & {
+  __typename?: 'SubmitApplicationPayload';
+  code: Scalars['String'];
+  message: Scalars['String'];
+  success: Scalars['Boolean'];
+};
 
 export type UpdateJobPayload = MutationResponse & {
   __typename?: 'UpdateJobPayload';
