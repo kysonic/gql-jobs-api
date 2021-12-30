@@ -34,5 +34,6 @@ type Mutation {
   # Application #
   submitApplication(jobId: ID!): SubmitApplicationPayload!
   # Files #
-  uploadFile(file: Upload!): File!
+  uploadFile(file: Upload!): UploadFilePayload!
+  deleteFile(filePath: String!): DeleteFilePayload!
 }

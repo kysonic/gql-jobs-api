@@ -29,5 +29,10 @@ export default async (
   await finished(counter); // Without it the error would be handled by node
   await finished(out);
 
-  return { filename, mimetype, encoding, path };
+  return {
+    code: '200',
+    success: true,
+    message: 'File uploaded successfully!',
+    file: { filename, mimetype, encoding, path },
+  };
 };

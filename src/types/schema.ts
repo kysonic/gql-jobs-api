@@ -29,6 +29,13 @@ export type CreateJobPayload = MutationResponse & {
   success: Scalars['Boolean'];
 };
 
+export type DeleteFilePayload = MutationResponse & {
+  __typename?: 'DeleteFilePayload';
+  code: Scalars['String'];
+  message: Scalars['String'];
+  success: Scalars['Boolean'];
+};
+
 export type DeleteJobPayload = MutationResponse & {
   __typename?: 'DeleteJobPayload';
   code: Scalars['String'];
@@ -113,6 +120,7 @@ export type LogoutPayload = MutationResponse & {
 export type Mutation = {
   __typename?: 'Mutation';
   createJob: CreateJobPayload;
+  deleteFile: DeleteFilePayload;
   deleteJob: DeleteJobPayload;
   forgotPassword: ForgotPasswordPayload;
   login: LoginPayload;
@@ -121,13 +129,18 @@ export type Mutation = {
   signup: SignupPayload;
   submitApplication: SubmitApplicationPayload;
   updateJob: UpdateJobPayload;
-  uploadFile: File;
+  uploadFile: UploadFilePayload;
   verifyEmail: VerifyEmailPayload;
 };
 
 
 export type MutationCreateJobArgs = {
   job: JobInput;
+};
+
+
+export type MutationDeleteFileArgs = {
+  filePath: Scalars['String'];
 };
 
 
@@ -253,6 +266,14 @@ export type UpdateJobPayload = MutationResponse & {
   __typename?: 'UpdateJobPayload';
   code: Scalars['String'];
   job: Job;
+  message: Scalars['String'];
+  success: Scalars['Boolean'];
+};
+
+export type UploadFilePayload = MutationResponse & {
+  __typename?: 'UploadFilePayload';
+  code: Scalars['String'];
+  file: File;
   message: Scalars['String'];
   success: Scalars['Boolean'];
 };
