@@ -1,4 +1,5 @@
 import { ApolloServer } from 'apollo-server-express';
+import { graphqlUploadExpress } from 'graphql-upload';
 import express from 'express';
 import cookieParser from 'cookie-parser';
 import http from 'http';
@@ -17,8 +18,11 @@ async function start() {
   try {
     const app = express();
     app.use(cookieParser(process.env.JWT_SECRET));
+    app.use(graphqlUploadExpress());
+
     const httpServer = http.createServer(app);
     const typeDefs = await getTypeDefs();
+
     const server = new ApolloServer({
       typeDefs,
       resolvers,

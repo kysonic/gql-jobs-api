@@ -10,6 +10,7 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
+  Upload: any;
 };
 
 export enum BenefitEnum {
@@ -35,6 +36,13 @@ export type DeleteJobPayload = MutationResponse & {
   success: Scalars['Boolean'];
 };
 
+export type File = {
+  __typename?: 'File';
+  encoding: Scalars['String'];
+  filename: Scalars['String'];
+  mimetype: Scalars['String'];
+};
+
 export type ForgotPasswordPayload = MutationResponse & {
   __typename?: 'ForgotPasswordPayload';
   code: Scalars['String'];
@@ -45,7 +53,7 @@ export type ForgotPasswordPayload = MutationResponse & {
 export type Job = {
   __typename?: 'Job';
   _id: Scalars['ID'];
-  author: User;
+  author: PublicUser;
   benefits?: Maybe<Array<Maybe<BenefitEnum>>>;
   cover?: Maybe<Scalars['String']>;
   createdAt: Scalars['String'];
@@ -112,6 +120,7 @@ export type Mutation = {
   signup: SignupPayload;
   submitApplication: SubmitApplicationPayload;
   updateJob: UpdateJobPayload;
+  uploadFile: File;
   verifyEmail: VerifyEmailPayload;
 };
 
@@ -159,6 +168,11 @@ export type MutationSubmitApplicationArgs = {
 export type MutationUpdateJobArgs = {
   id: Scalars['ID'];
   job: JobInput;
+};
+
+
+export type MutationUploadFileArgs = {
+  file: Scalars['Upload'];
 };
 
 
