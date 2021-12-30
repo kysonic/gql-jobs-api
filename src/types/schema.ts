@@ -41,6 +41,7 @@ export type File = {
   encoding: Scalars['String'];
   filename: Scalars['String'];
   mimetype: Scalars['String'];
+  path: Scalars['String'];
 };
 
 export type ForgotPasswordPayload = MutationResponse & {

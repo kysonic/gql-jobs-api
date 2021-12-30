@@ -18,6 +18,7 @@ async function start() {
   try {
     const app = express();
     app.use(cookieParser(process.env.JWT_SECRET));
+    app.use(express.static('./public'));
     app.use(graphqlUploadExpress());
 
     const httpServer = http.createServer(app);
