@@ -14,7 +14,7 @@ const JobSalary = new Schema<JobSalary>({
   to: Number,
 });
 
-type MongooseApplication = {
+export type MongooseApplication = {
   from: PublicUser | ObjectId | string;
   message?: string | null;
 };

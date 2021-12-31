@@ -1,10 +1,10 @@
 import User from '../../models/User';
-import { Application } from '../../types/schema';
+import { MongooseApplication } from '../../models/Job';
 
 export default {
-  from: async (application: Application) => {
+  from: async (application: MongooseApplication) => {
     // No batching here so how it's not production application
-    const user = await User.findOne(application.from as any);
+    const user = await User.findOne({ _id: application.from });
 
     return user?.getPublicUser();
   },
