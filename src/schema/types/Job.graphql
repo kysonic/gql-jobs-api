@@ -41,6 +41,7 @@ type Job {
   requiredExperience: Int
   cover: String
   author: PublicUser!
+  applications: [Application!]!
   createdAt: String!
   updatedAt: String!
 }

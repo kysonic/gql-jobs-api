@@ -1,8 +1,8 @@
-#import User from './User.graphql'
+#import PublicUser from './User.graphql'
 #import MutationResponse from './Basics.graphql'
 
 type Application {
-  from: User 
+  from: PublicUser 
   message: String
 }
 

@@ -13,6 +13,12 @@ export type Scalars = {
   Upload: any;
 };
 
+export type Application = {
+  __typename?: 'Application';
+  from?: Maybe<PublicUser>;
+  message?: Maybe<Scalars['String']>;
+};
+
 export enum BenefitEnum {
   Coffee = 'COFFEE',
   FreeParking = 'FREE_PARKING',
@@ -61,6 +67,7 @@ export type ForgotPasswordPayload = MutationResponse & {
 export type Job = {
   __typename?: 'Job';
   _id: Scalars['ID'];
+  applications: Array<Application>;
   author: PublicUser;
   benefits?: Maybe<Array<Maybe<BenefitEnum>>>;
   cover?: Maybe<Scalars['String']>;
@@ -176,6 +183,7 @@ export type MutationSignupArgs = {
 
 export type MutationSubmitApplicationArgs = {
   jobId: Scalars['ID'];
+  message?: InputMaybe<Scalars['String']>;
 };
 
 
@@ -210,6 +218,7 @@ export type PublicUser = {
 
 export type Query = {
   __typename?: 'Query';
+  application?: Maybe<Application>;
   fullUser?: Maybe<User>;
   job: Job;
   jobs: Array<Job>;

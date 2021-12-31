@@ -1,3 +1,4 @@
+import { ObjectId } from 'mongodb';
 import { Schema, Types, model } from 'mongoose';
 import {
   Job,
@@ -5,6 +6,7 @@ import {
   LevelEnum,
   JobSalary,
   BenefitEnum,
+  PublicUser,
 } from '../types/schema';
 
 const JobSalary = new Schema<JobSalary>({
@@ -12,7 +14,26 @@ const JobSalary = new Schema<JobSalary>({
   to: Number,
 });
 
-const JobSchema = new Schema<Job>(
+type MongooseApplication = {
+  from: PublicUser | ObjectId | string;
+  message?: string | null;
+};
+
+const Application = new Schema<MongooseApplication>({
+  from: {
+    type: Types.ObjectId,
+    ref: 'User',
+    required: true,
+  },
+  message: String,
+});
+
+type MongooseJob = Omit<Job, 'applications' | 'author'> & {
+  author: PublicUser | ObjectId | string;
+  applications: Array<MongooseApplication>;
+};
+
+const JobSchema = new Schema<MongooseJob>(
   {
     title: {
       type: String,
@@ -50,10 +71,14 @@ const JobSchema = new Schema<Job>(
       required: true,
     },
     cover: String,
+    applications: {
+      type: [Application],
+      default: [],
+    },
   },
   {
     timestamps: true,
   },
 );
 
-export default model<Job>('Job', JobSchema);
+export default model<MongooseJob>('Job', JobSchema);

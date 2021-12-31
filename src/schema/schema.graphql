@@ -7,12 +7,14 @@
 scalar Upload
 
 type Query {
-  # Authorization #
+  # User #
   myUser: PublicUser!
-  fullUser: User
   # Job #
   jobs(textSearch: String, skills: [SkillEnum], level: LevelEnum, salary: JobSalaryInput, benefits: [BenefitEnum], page: Int, limit: Int): [Job!]!
   job(id: ID!): Job!
+  # Phantom # Codegen doesn't generate ts if types are not exported in main types  
+  fullUser: User
+  application: Application
 }
 
 type Mutation {
@@ -32,7 +34,7 @@ type Mutation {
   updateJob(id: ID!, job: JobInput!): UpdateJobPayload!
   deleteJob(id: ID!): DeleteJobPayload!
   # Application #
-  submitApplication(jobId: ID!): SubmitApplicationPayload!
+  submitApplication(jobId: ID!, message: String): SubmitApplicationPayload!
   # Files #
   uploadFile(file: Upload!): UploadFilePayload!
   deleteFile(filePath: String!): DeleteFilePayload!

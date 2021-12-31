@@ -1,4 +1,4 @@
-MONGO_URI=
+MONGO_URI=mongodb://localhost:27017/<DBNAME>?readPreference=primary&directConnection=true&ssl=false
 JWT_SECRET=!7&C726AHBVCC72880-
 PASSWORD_SALT=**&CNB^&*7788CC29
 MAILGUN_APIKEY=
