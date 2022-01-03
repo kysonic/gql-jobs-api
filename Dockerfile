@@ -6,6 +6,7 @@ RUN apk add --no-cache python3 make g++
 COPY build /app
 COPY package.json /app
 COPY .env /app
+# Deps
 RUN npm install --force
 EXPOSE 4000
 # Define container specific variable, .env won't override 
