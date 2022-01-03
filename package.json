@@ -17,8 +17,7 @@
     "generate": "graphql-codegen",
     "generate:watch": "graphql-codegen --watch",
     "lint": "eslint src/**/*.ts",
-    "pretty": "prettier src/**/*.ts",
-    "postinstall": "cp -n .env.tpl .env"
+    "pretty": "prettier src/**/*.ts"
   },
   "dependencies": {
     "@graphql-tools/graphql-file-loader": "^7.3.3",

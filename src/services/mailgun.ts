@@ -4,14 +4,20 @@ import { renderEmailTemplate, EMAIL_DEFAULT_RESOURCES } from '../email';
 
 dotenv.config();
 
-export const mailgun = Mailgun({
-  apiKey: process.env.MAILGUN_APIKEY,
-  domain: process.env.MAILGUN_DOMAIN,
-});
+export const mailgun = () => {
+  if (!process.env.MAILGUN_APIKEY || process.env.MAILGUN_DOMAIN) {
+    return null;
+  }
+
+  return Mailgun({
+    apiKey: process.env.MAILGUN_APIKEY,
+    domain: process.env.MAILGUN_DOMAIN,
+  });
+};
 
 const MAILGUN_SUCCESS_MESSAGE = 'Queued. Thank you.';
 
-export type MailgunResponse = Promise<messages.SendResponse>;
+export type MailgunResponse = Promise<messages.SendResponse | null>;
 
 export async function sendMailgunEmail(
   email: string,
@@ -27,10 +33,16 @@ export async function sendMailgunEmail(
     inline: EMAIL_DEFAULT_RESOURCES.concat(resources),
   };
 
-  const response = await mailgun.messages().send(data);
+  const mg = mailgun();
+
+  if (!mg) {
+    return null;
+  }
+
+  const response = await mg.messages().send(data);
 
   if (response?.message !== MAILGUN_SUCCESS_MESSAGE) {
-    throw new Error(response.message);
+    throw new Error(response?.message);
   }
 
   return response;

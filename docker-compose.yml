@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+    db:
+        image: mongo
+        container_name: mongodb
+        environment:
+            - PUID=1000
+            - PGID=1000
+        volumes:
+            - ~/Documents/mongodb/database:/data/db
+            - ./mongorestore.sh:/docker-entrypoint-initdb.d/mongorestore.sh
+            - ./gql-job-api:/gql-job-api
+        ports:
+            - "27017:27017"
+        restart: unless-stopped
+    app:
+        image: app
+        container_name: gql-job-api
+        build: .
+        depends_on:
+          - db
+        ports:
+            - "4000:4000"
+        links:
+            - db
+        restart: unless-stopped 
