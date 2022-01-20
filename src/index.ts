@@ -10,7 +10,7 @@ import {
 } from 'apollo-server-core';
 import { connectDB } from './db/connect';
 import resolvers from './resolvers';
-import { getTypeDefs } from './typedefs';
+import typeDefs from './typedefs.json';
 
 dotenv.config();
 
@@ -22,10 +22,9 @@ async function start() {
     app.use(graphqlUploadExpress());
 
     const httpServer = http.createServer(app);
-    const typeDefs = await getTypeDefs();
 
     const server = new ApolloServer({
-      typeDefs,
+      typeDefs: typeDefs as any,
       resolvers,
       plugins: [
         ApolloServerPluginLandingPageGraphQLPlayground({

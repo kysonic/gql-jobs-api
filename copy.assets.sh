@@ -1,4 +1,4 @@
 #!/bin/bash
 
-cp -r ./src/schema ./build/schema 
+cp ./src/typedefs.json ./build/typedefs.json
 cp -r ./src/email/templates ./build/email/templates
